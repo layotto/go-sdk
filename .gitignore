@@ -1,0 +1,54 @@
+build/bundles
+*.log*
+.vscode
+.idea
+.test
+.out
+!./.gitignore
+IMAGEBUILD/
+coverage.txt
+.DS_Store
+logs/
+*.swp
+/layotto
+/cover.out
+vendor/
+demo/state/redis/client
+_output/
+
+# node
+node_modules/
+
+# Java
+target/
+*.class
+.DS_Store
+application.pid
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.classpath
+.project
+.settings
+
+# Idea
+.idea
+*.iml
+
+# git
+*.orig
+
+# integrate test
+integrate_test.sh
+
+# production of make script
+goimports
+
+# production of quickstart testing
+default.etcd/
+nohup.out
+
+# production of dead link checker
+/result.txt
