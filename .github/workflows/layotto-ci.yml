@@ -1,0 +1,100 @@
+name: Layotto Go SDK Dev Pipeline 🌊
+
+# Ignore some changes of commits:
+# 1. changes in .ci/
+# 2. changes in docs/
+# 3. changes in markdown files
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+  pull_request:
+    branches: "*"
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+
+jobs:
+  style-check:
+    name: "Go Style Check"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14.15
+      - name: Format Go
+        run: |
+           make workspace
+  resolve-modules:
+    name: "Resolve Go Modules"
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout Sources
+        uses: actions/checkout@v2
+      - id: set-matrix
+        run: sh ./etc/script/resolve-modules.sh
+  golangci-lint:
+    name: "Go CI Linter"
+    needs: [style-check,resolve-modules]
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix: ${{ fromJson(needs.resolve-modules.outputs.matrix) }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.14.15
+    - name: Go Lint Test
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: v1.46.2
+        working-directory: ${{ matrix.workdir }}
+        args: "--out-${NO_FUTURE}format colored-line-number"
+
+  go-unit-test:
+    name: "Go Unit Test"
+    needs: [style-check]
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.14.15
+    - name: Go Unit Test
+      run: make test
+
+  coverage:
+    name: "Coverage Analysis"
+    needs: [go-unit-test,golangci-lint,style-check]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Test Coverage
+      run: make coverage
+    - name: Post Coverage
+      run: bash <(curl -s https://codecov.io/bash)
+
+  runtime-integrate:
+    name: "Integrate with Runtime"
+    needs: [coverage]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14.15
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run Integrate tests
+        run:  make integrate-runtime
