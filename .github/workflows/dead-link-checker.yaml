@@ -1,0 +1,43 @@
+name: Layotto Go SDK Env Pipeline 🌊
+
+# Deadlink Validation will auto run at 0:00 am everyday.
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  pull_request:
+    paths:
+      - '**/*.md'
+    types: [opened, edited, reopened, synchronize]
+    branches:
+      - main
+
+jobs:
+  check:
+    name: "DeadLink Validation"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+#      - name: Install and start docusaurus server
+#        run: |
+#             sudo npm install
+#             sudo npm run build --config docs && nohup npm run serve --config docs &
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          base-branch: main
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'yes'
+          check-modified-files-only: 'yes'
+          config-file: '.github/dead_link_check_config.json'
+          folder-path: 'docs/blog/,docs/docs/,docs/i18n/en-US/docusaurus-plugin-content-blog/,docs/i18n/en-US/docusaurus-plugin-content-docs/current/'
+
+#      - name: Install markdown-link-check
+#        run: sudo npm install -g markdown-link-check
+
+#      - name: Install and start docusaurus server
+#        run: |
+#             sudo npm install
+#             sudo npm run build --config docs && npm run serve --config docs
+#      - name: Check dead links in all the .md files
+#        run: make deadlink
