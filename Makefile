@@ -40,3 +40,21 @@ test:
 modtidy:
 	@echo "===========> Running go codes format"
 	go mod tidy
+
+.PHONY: workspace
+workspace: ## check if workspace is clean and committed.
+workspace: go.style
+
+.PHONY: coverage
+coverage: ## Run coverage analysis.
+coverage: checker.coverage
+
+.PHONY: go.style
+go.style:
+	@echo "===========> Running go style check"
+	@$(MAKE) format && git status && [[ -z `git status -s` ]] || echo -e "\n${RED}Error: there are uncommitted changes after formatting all the code. ${GREEN}\nHow to fix it:${NO_COLOR} please 'make format' and then use git to commit all those changed files. "
+
+.PHONY: checker.coverage
+checker.coverage:
+	@echo "===========> Coverage Analysis"
+	sh script/report.sh
