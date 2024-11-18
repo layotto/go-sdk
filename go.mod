@@ -1,6 +1,6 @@
 module github.com/layotto/go-sdk
 
-go 1.14
+go 1.18
 
 require (
 	github.com/golang/protobuf v1.5.0
@@ -10,5 +10,15 @@ require (
 	google.golang.org/grpc v1.37.0
 	google.golang.org/protobuf v1.26.0-rc.1
 	mosn.io/layotto/sdk/go-sdk v0.0.0-20240927030843-b4fed4d06be4
-	mosn.io/layotto/spec v0.0.0-20240927030843-b4fed4d06be4
+	mosn.io/layotto/spec v0.0.0-20241219020554-13c49c2cb067
+)
+
+require (
+	github.com/davecgh/go-spew v1.1.0 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	golang.org/x/net v0.0.0-20190311183353-d8887717615a // indirect
+	golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a // indirect
+	golang.org/x/text v0.3.0 // indirect
+	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
 )

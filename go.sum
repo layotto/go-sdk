@@ -97,7 +97,6 @@ honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099/go.mod h1:rf3lG4BRIbNafJWh
 honnef.co/go/tools v0.0.0-20190523083050-ea95bdfd59fc/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
 mosn.io/layotto/sdk/go-sdk v0.0.0-20240927030843-b4fed4d06be4 h1:XgviZld/ZCFQHaIvpIvRzBt4bMzFL9rFNUROe+ECQMA=
 mosn.io/layotto/sdk/go-sdk v0.0.0-20240927030843-b4fed4d06be4/go.mod h1:vfiOK6P29QD8Ti5NTeTfWamLN3EzrcCQD1tpldX4K3Y=
-mosn.io/layotto/spec v0.0.0-20210707123820-584778d048d3 h1:8GbrNw6AOi4+DrQGG5TbxMNPPRQJ0uXjkSCP2qeKc08=
 mosn.io/layotto/spec v0.0.0-20210707123820-584778d048d3/go.mod h1:ex31WL9Vx1PadpZmN4CZpw/57xzBeKIwqMI5fYXi7RY=
-mosn.io/layotto/spec v0.0.0-20240927030843-b4fed4d06be4 h1:4ThNPnPfpPzk32hUIm/mRm4+Ch4MmFNFbnFhbuZ4Qms=
-mosn.io/layotto/spec v0.0.0-20240927030843-b4fed4d06be4/go.mod h1:3ri6wotzCp2LTjrCZ3Pfre+u1tw2b4Sc+qZERM7apwU=
+mosn.io/layotto/spec v0.0.0-20241219020554-13c49c2cb067 h1:bQjCjR8Yt3G+QnrPV6uVZ0Y/CeK5+Uj/ytJ0wSl9cG8=
+mosn.io/layotto/spec v0.0.0-20241219020554-13c49c2cb067/go.mod h1:3ri6wotzCp2LTjrCZ3Pfre+u1tw2b4Sc+qZERM7apwU=
