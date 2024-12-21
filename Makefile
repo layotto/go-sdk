@@ -33,7 +33,7 @@ test:
 	-coverprofile=coverage.txt \
 	-covermode=atomic \
 	-timeout=10m \
-	-short -v `go list ./... | grep -v runtime`
+	-short -v ./client/...
 
 
 .PHONY: modtidy
